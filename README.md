@@ -4,26 +4,36 @@
 
 ## Objective
 
-To gain practical experience of C++ coding using a suitable IDE (integrated development environment). 
+To demonstrate proficiency in C++ by developing a program to perform a defined computational task.
 
 
 # Assessment criteria
 
-Try to use variable/function naming, comments and indentation to make your program as easy to understand as possible. Also try to make your program as resilient to runtime errors as possible. 
+Your submission will be marked according to the following criteria:
 
-Your submission will be marked based on a number of factors: 
+**40%: Performance**
+- Does the program compile?
+- Does the program run successfully?
+- Is the output correct?
+- Does the program meet all requirements?
+- Is the code for each individual aspect of the task correct?
+- Are command-line arguments handled correctly?
 
-| Criterion | weighting |
-|:---|:---:|
-| code compiles | 5% |
-| program runs successfully | 5% |
-| program produces correct results | 5% |
-| program handles command-line arguments as expected | 5% |
-| code includes appropriate error handling | 5% |
-| code is designed to be modular and reusable | 10% |
-| code is organised across multiple files | 5% | 
-| code is well-organised and legible | 5% |
-| code indentation is correct, and appropriate use of comments | 5% |
+**40%: Design**
+- Is the code logically organised?
+- Does it use appropriate C++ features?
+- Does it make good use of control and data structures?
+- Does it make good use of functions?
+- Does the code include error checking and appropriate handling?
+
+**20%: Maintainability**
+- Is the code easily understandable?
+- Is the code designed for modularity and code re-use?
+- Is the code organised across multiple files?
+- Are functions and variables given interpretable names?
+- Does the code follow established naming conventions?
+- Does the code include comments where appropriate?
+- Is code indentation correct throughout?
 
 
 
@@ -55,6 +65,8 @@ Your program should perform the following main steps (these are described in mor
 5. Classify the stress level based on the computed RMSSD value using clinical reference thresholds.
 6. Write a summary of the analysis to an output text file (specified as a command-line argument), listing all detected peaks, R-R intervals, and the HRV summary.
 
+# Program requirements
+
 ## Command-line interface 
 
 Your program should accept at least 2 arguments: the filename containing the ECG recording, and the filename to use for the output file for the report of the analysis. 
@@ -66,11 +78,11 @@ If a fourth argument is provided, this should be interpreted as the minimum time
 
 ## Loading the data and determining the block size 
 
-You are provided with two data files (`ecg_data1.txt` and `ecg_data2.txt`) containing synthetic ECG signals. Each line in these files contains two values: the time in seconds and the voltage in mV of the sampled signal.
+You are provided with two data files (`ecg_data1.txt` and `ecg_data2.txt`) containing synthetic ECG signals. Each line in these files contains two values: the time in seconds and the voltage in mV of the sampled signal. Your program should be capable of loading any file provided in this format.
 
 ## Detecting the R-peaks
 
-Your task is to implement a threshold-based peak detection algorithm. The algorithm scans through the ECG signal and identifies a sample at index i as an R-peak if all three of the following conditions are met:
+Your program should detect peaks by scanning through the ECG signal, identifying a sample at index $i$ as an R-peak if all three of the following conditions are met:
 - It is a local maximum: $V[i]>V[i-1]$ and $V[i]>V[i+1]$ 
 - Its voltage exceeds the threshold: $V[i] > V_{\textrm{threshold}}$
 - Sufficient time has elapsed since the last detected peak (refractory period): $t[i]-t[\textrm{last peak}] >= t_{\textrm{min}}$
@@ -78,22 +90,22 @@ Your task is to implement a threshold-based peak detection algorithm. The algori
 
 ## Computing the R-R intervals
 
-Once R-peaks have been detected, compute the R-R intervals in milliseconds by calculating the time difference between each consecutive pair of peaks (remember to take the sampling time interval into account). For each R-R interval, also compute the instantaneous heart rate in beats per minute (BPM), which is computed as $\textrm{BPM}[i] = 60,000 / \textrm{RR}[i]$ (where $\textrm{RR}[i]$ is the $i$th  R-R interval in milliseconds).
+Once R-peaks have been detected, your program should compute the R-R intervals in milliseconds by calculating the time difference between each consecutive pair of peaks (remember to take the sampling time interval into account). 
+
+**TBD: do we need this?**: For each R-R interval, also compute the instantaneous heart rate in beats per minute (BPM), which is computed as $\textrm{BPM}[i] = 60,000 / \textrm{RR}[i]$ (where $\textrm{RR}[i]$ is the $i$th  R-R interval in milliseconds).
 
 
 ## Computing the HRV metrics 
 
-From all the R-R intervals, compute the following clinical HRV metrics: 
+From all the R-R intervals, your program should compute the following clinical HRV metrics: 
 - The arithmetic mean of all R-R interval durations (in ms)
 - The RMSSD (Root Mean Square of Successive Differences), computed from the successive differences between adjacent R-R intervals $t_{\textrm{RR}}$ as:
-
-$$ \textrm{RMSSD} = \sqrt{ \frac{1}{N-1} \sum_i^{N-1} \left( \textrm{RR}[i] - \textrm{RR}[i-1] \right)^2 } $$
 
   ![$$ \textrm{RMSSD} = \sqrt{ \frac{1}{N-1} \sum_i^{N-1} \left( \textrm{RR}[i] - \textrm{RR}[i-1] \right)^2 } $$](eqn.png)
 
 ## Classifying the stress level 
 
-Based on simplified clinical reference ranges, the RMSSD value should be used to classify the stress level as follows:
+Based on simplified clinical reference ranges, your program should use the RMSSD value to classify the stress level as follows:
 
 | RMSSD Range | Classification | Interpretation | 
 |---|---|:---|
@@ -103,7 +115,7 @@ Based on simplified clinical reference ranges, the RMSSD value should be used to
  
 ## Print the result
 
-Write the final report to the text file specified as the second argument on the command-line. This should include the name of the file containing the EGC signal, the mean of the R-R intervals, the RMSSD and the stress level, in a format similar to:
+Your program should write its final report to the text file specified as the second argument on the command-line. This should include the name of the file containing the EGC signal, the mean of the R-R intervals, the RMSSD and the stress level, in a format similar to:
 ```
 data file: ecg_data1.txt
 mean RR interval: 1.2
