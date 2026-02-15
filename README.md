@@ -19,16 +19,16 @@ Your submission will be marked according to the following criteria:
 - Is the code for each individual aspect of the task correct?
 - Are command-line arguments handled correctly?
 
-**40%: Design**
+**30%: Design**
 - Is the code logically organised?
 - Does it use appropriate C++ features?
 - Does it make good use of control and data structures?
 - Does it make good use of functions?
 - Does the code include error checking and appropriate handling?
 
-**20%: Maintainability**
+**30%: Maintainability**
 - Is the code easily understandable?
-- Is the code designed for modularity and code re-use?
+- Is the code designed for modularity and re-use?
 - Is the code organised across multiple files?
 - Are functions and variables given interpretable names?
 - Does the code follow established naming conventions?
@@ -76,7 +76,7 @@ If a third argument is provided, this should be interpreted as a voltage thresho
 If a fourth argument is provided, this should be interpreted as the minimum time $t_{\textrm{min}}$ (in seconds) between peaks, which should be set to 0.3s by default.
 
 
-## Loading the data and determining the block size 
+## Loading the input data 
 
 You are provided with two data files (`ecg_data1.txt` and `ecg_data2.txt`) containing synthetic ECG signals. Each line in these files contains two values: the time in seconds and the voltage in mV of the sampled signal. Your program should be capable of loading any file provided in this format.
 
@@ -113,7 +113,7 @@ Based on simplified clinical reference ranges, your program should use the RMSSD
 | 20 – 50 ms | Moderate Stress | Normal range |
 | < 20 ms | High Stress | Low HRV — consider follow-up |
  
-## Print the result
+## Writing the result to file
 
 Your program should write its final report to the text file specified as the second argument on the command-line. This should include the name of the file containing the EGC signal, the mean of the R-R intervals, the RMSSD and the stress level, in a format similar to:
 ```
